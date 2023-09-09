@@ -7,8 +7,8 @@ const CategoryItem = ({item}) => {
     <View >
       <Text style= {styles.categoryText}>{item}</Text>
     </View>
-  )
-}
+  );
+};
 
 export default CategoryItem
 

@@ -1,13 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { StyleSheet, Text, View , SafeAreaView} from 'react-native';
+
 import { colors } from './src/theme/colors';
-import Header from './src/components/Header';
-import Categories from './src/components/Categories';
 import Home from './src/screens/Home';
+import Search from './src/components/Search';
+import Productos from './src/screens/Productos';
 export default function App() {
   return (
     <SafeAreaView>
-      <Home/>
+      {/* <Home/>
+      <Search/> */}
+      <Productos category="smartphones"/>
     </SafeAreaView>
   );
 }

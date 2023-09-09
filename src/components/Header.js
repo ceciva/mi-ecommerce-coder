@@ -12,7 +12,7 @@ const Header = ({title}) => {
 
 const styles = StyleSheet.create({
   container:{
-    height: 85,
+    height: 55,
     width: "100%",
     justifyContent:"center",
     alignItems: "center",
