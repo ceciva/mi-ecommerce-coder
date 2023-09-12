@@ -12,7 +12,7 @@ const Header = ({title}) => {
 
 const styles = StyleSheet.create({
   container:{
-    height: 55,
+    height: 75,
     width: "100%",
     justifyContent:"center",
     alignItems: "center",
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
 
   },
   text:{
+    fontFamily: "dancing",
     fontSize: 25,
     marginVertical: 10,
     fontWeight: "600",

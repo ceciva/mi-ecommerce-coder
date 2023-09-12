@@ -1,4 +1,4 @@
-import { Image, ImageComponent, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../theme/colors'
 
@@ -21,6 +21,7 @@ export default ProductItem
 
 const styles = StyleSheet.create({
     container:{
+        
         marginHorizontal:20,
         marginVertical: 10,
         borderColor: colors.violet,
@@ -32,7 +33,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },  
     text:{
-        fontSize: 10,
+        fontFamily: "dancing",
+        fontSize: 20,
         fontWeight: "600",
         marginLeft:20,
     },

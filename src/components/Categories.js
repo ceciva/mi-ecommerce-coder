@@ -19,6 +19,7 @@ export default Categories
 
 const styles = StyleSheet.create({
     container:{
+        
         backgroundColor: colors.violet,
         alignItems: "center",
         justifyContent:"center"

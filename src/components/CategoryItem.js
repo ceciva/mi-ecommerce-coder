@@ -14,6 +14,7 @@ export default CategoryItem
 
 const styles = StyleSheet.create({
     categoryText: {
+       fontFamily: "dancing",
        fontSize: 20,
        margin: 2,
        color: colors.white,

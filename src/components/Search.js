@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 0,
     },
     input:{
+        fontFamily: "dancing",
         width: "88%",
         fontSize: 20,
         margin: 2,
