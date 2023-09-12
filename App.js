@@ -9,7 +9,7 @@ import { useFonts } from 'expo-font';
 
 export default function App() {
   const [fontsLoaded]= useFonts({
-    josefinSlab: require("./assets/Fonts/JosefinSlab-Italic.ttf"),
+    josefinSlab: require("./assets/Fonts/JosefinSlab-Bold.ttf"),
     dancing: require("./assets/Fonts/DancingScript-Bold.ttf"),
   }); 
   
