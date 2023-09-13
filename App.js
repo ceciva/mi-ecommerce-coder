@@ -2,10 +2,12 @@
 import { StyleSheet, Text, View , SafeAreaView} from 'react-native';
 
 import { colors } from './src/theme/colors';
+
 import Home from './src/screens/Home';
-import Search from './src/components/Search';
 import Productos from './src/screens/Productos';
+
 import { useFonts } from 'expo-font';
+import ProductDetail from './src/screens/ProductDetail';
 
 export default function App() {
   const [fontsLoaded]= useFonts({
@@ -20,8 +22,8 @@ console.log(fontsLoaded) ;
   return (
     <SafeAreaView>
       {/* <Home/> */}
-      {/* <Search/> */}
-      <Productos category="smartphones"/>
+      {/* <Productos category="smartphones"/> */}
+      <ProductDetail/>
     </SafeAreaView>
   );
 }
