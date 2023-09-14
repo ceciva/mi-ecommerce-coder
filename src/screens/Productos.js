@@ -1,20 +1,19 @@
-import { FlatList, Image, StyleSheet, Text, View, textInput } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, View, SafeAreaView, Pressable } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import Header from '../components/Header'
 import{products} from "../data/products"
 import Search from '../components/Search'
 import ProductItem from '../components/ProductItem'
-
-const Productos = ({category}) => {
+import { Ionicons } from '@expo/vector-icons';
+ 
+const Productos = ({ route, navigation}) => {
   const [productFiltered, setProductFiltered]= useState([]);
-  const [text, setText]= useState("");
+  const [text, setText]= useState(null);
 
-  console.log("TEXTO", text);
-  console.log("CATEGORY", productFiltered)
+  const {item} = route.params;
   
-
   useEffect(() => {
-    const filterByCategory= products.filter((el)=> el.category ===category);
+    const filterByCategory= products.filter((el)=> el.category ===item);
     setProductFiltered(filterByCategory);
     
 
@@ -23,19 +22,22 @@ const Productos = ({category}) => {
       setProductFiltered(titleProduct);
     }   
 
-  }, [text, category]);
+  }, [text, item]);
   
   return (
-    <View>
-      <Header title="Productos"/>
+    <SafeAreaView>
+      <Header title= {item}/>
+      <Pressable onPress={()=>navigation.goBack()}>
+        <Ionicons name="arrow-back-circle" size={30} color="#614BC3" />
+      </Pressable>
       <Search text= {text} setText={setText}/>
       <FlatList
         data={productFiltered} 
         keyExtractor= {products.id}
-        renderItem= {({item})=> <ProductItem item={item}/>}
+        renderItem= {({item})=> <ProductItem navigation ={navigation} item={item}/>}
       />
    
-    </View>
+    </SafeAreaView>
   )
 }
 

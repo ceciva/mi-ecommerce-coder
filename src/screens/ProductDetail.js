@@ -1,15 +1,19 @@
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable, SafeAreaView } from 'react-native'
 import React from 'react'
 import Header from '../components/Header';
 import { products } from '../data/products';
 import {AntDesign} from "@expo/vector-icons";
 import { colors } from '../theme/colors';
+import { Ionicons } from '@expo/vector-icons';
 
-const ProductDetail = () => {
+const ProductDetail = ({navigation}) => {
     const initialProd= products[0];
   return (
-    <View>
+    <SafeAreaView>
         <Header title= "Detalles del producto"/>
+        <Pressable onPress={()=>navigation.goBack()}>
+            <Ionicons name="arrow-back-circle" size={30} color="#614BC3" />
+        </Pressable>
         <View style={styles.imageContainer}>
             <Image
             resizeMode="cover"
@@ -36,7 +40,7 @@ const ProductDetail = () => {
            
         
       
-    </View>
+    </SafeAreaView>
   )
 }
 

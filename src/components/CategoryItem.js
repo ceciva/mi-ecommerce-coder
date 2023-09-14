@@ -1,12 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View , Pressable} from 'react-native'
 import React from 'react';
 import { colors } from '../theme/colors';
 
-const CategoryItem = ({item}) => {
+const CategoryItem = ({item, navigation}) => {
+  
   return (
-    <View >
+    <Pressable onPress={() => navigation.navigate("productos", {item:item })}>
       <Text style= {styles.categoryText}>{item}</Text>
-    </View>
+    </Pressable>
   );
 };
 
