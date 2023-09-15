@@ -27,7 +27,7 @@ const Productos = ({ route, navigation}) => {
   return (
     <SafeAreaView>
       <Header title= {item}/>
-      <Pressable onPress={()=>navigation.goBack()}>
+      <Pressable style={styles.goBack} onPress={()=>navigation.goBack()}>
         <Ionicons name="arrow-back-circle" size={30} color="#614BC3" />
       </Pressable>
       <Search text= {text} setText={setText}/>
@@ -43,4 +43,11 @@ const Productos = ({ route, navigation}) => {
 
 export default Productos
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  goBack:{
+    position:"absolute",
+    top: 27,
+    left: 5,
+
+},
+})

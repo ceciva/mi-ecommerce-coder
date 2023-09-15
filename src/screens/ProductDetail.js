@@ -6,12 +6,12 @@ import {AntDesign} from "@expo/vector-icons";
 import { colors } from '../theme/colors';
 import { Ionicons } from '@expo/vector-icons';
 
-const ProductDetail = ({navigation}) => {
-    const initialProd= products[0];
+const ProductDetail = ({route, navigation}) => {
+    const {item} = route.params;
   return (
     <SafeAreaView>
         <Header title= "Detalles del producto"/>
-        <Pressable onPress={()=>navigation.goBack()}>
+        <Pressable style={styles.goBack} onPress={()=>navigation.goBack()}>
             <Ionicons name="arrow-back-circle" size={30} color="#614BC3" />
         </Pressable>
         <View style={styles.imageContainer}>
@@ -19,18 +19,18 @@ const ProductDetail = ({navigation}) => {
             resizeMode="cover"
             style={styles.image}
             source={{
-                uri: initialProd.images[2],
+                uri: item.images[0],
             }}
             />
 
             <View style={styles.descriptionContainer}>
-                <Text style={styles.title}> {initialProd.title}</Text>
-                <Text style={styles.description}>{initialProd.description}</Text>
-                <Text style={styles.price}>$ {initialProd.price}</Text>
+                <Text style={styles.title}> {item.title}</Text>
+                <Text style={styles.description}>{item.description}</Text>
+                <Text style={styles.price}>$ {item.price}</Text>
 
                 <View style={styles.ratingContainer}>
                     <AntDesign name="star" size={21} color="black"/>
-                    <Text style={styles.rating}>Rating: {initialProd.rating}</Text>
+                    <Text style={styles.rating}>Rating: {item.rating}</Text>
                 </View>
             </View>    
         </View>
@@ -48,12 +48,18 @@ export default ProductDetail
 
 const styles = StyleSheet.create({
     image:{
-        height: 300,
-        width:360,
+        height: 250,
+        width:300,
     }, 
 
     imageContainer:{
         alignItems:"center",
+    },
+    goBack:{
+        position:"absolute",
+        top: 27,
+        left: 5,
+    
     },
     descriptionContainer:{
         marginVertical:10,
