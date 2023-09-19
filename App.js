@@ -5,6 +5,7 @@ import { useFonts } from 'expo-font';
 
 import { NavigationContainer } from '@react-navigation/native';
 import RootNavigation from './src/navigation/RootNavigation';
+import TabNav from './src/navigation/TabNav';
 
 export default function App() {
   const [fontsLoaded]= useFonts({
@@ -18,7 +19,7 @@ export default function App() {
 console.log(fontsLoaded) ; 
   return (
     <NavigationContainer>
-      <RootNavigation/>
+      <TabNav/>
     </NavigationContainer>
   );
 }
