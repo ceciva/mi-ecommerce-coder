@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View,SafeAreaView, FlatList } from 'react-native'
 import React from 'react'
 import Header from '../components/Header'
-import Categories from '../components/Categories'
+
 import { useWindowDimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { categories } from '../data/categories';
+
 import CategoryItem from '../components/CategoryItem';
 import { colors } from '../theme/colors';
 
