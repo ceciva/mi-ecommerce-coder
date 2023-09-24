@@ -3,7 +3,6 @@ import { StyleSheet, Text, View , SafeAreaView} from 'react-native';
 import { colors } from './src/theme/colors';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
-
 import { store } from './src/redux/store';
 import { NavigationContainer } from '@react-navigation/native';
 import RootNavigation from './src/navigation/RootNavigation';
@@ -20,7 +19,7 @@ export default function App() {
   }
 console.log(fontsLoaded) ; 
   return (
-    <Provider>
+    <Provider store={store}>
       <NavigationContainer>
         <TabNav/>
       </NavigationContainer>

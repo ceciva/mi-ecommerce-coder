@@ -1,10 +1,11 @@
-import { FlatList, Image, StyleSheet, Text, View, SafeAreaView, Pressable } from 'react-native'
+import { FlatList, StyleSheet, SafeAreaView, Pressable } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import Header from '../components/Header'
-import{products} from "../data/products"
+
 import Search from '../components/Search'
 import ProductItem from '../components/ProductItem'
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector } from 'react-redux'
  
 const Productos = ({ route, navigation}) => {
   const [productFiltered, setProductFiltered]= useState([]);
@@ -12,9 +13,14 @@ const Productos = ({ route, navigation}) => {
 
   const {item} = route.params;
   
+  const products = useSelector((state) => state.homeSlice.allProducts);
+
+  const productsFilteredByCategory = useSelector(
+    (state) => state.homeSlice.productsFilteredByCategory
+  );
+  
   useEffect(() => {
-    const filterByCategory= products.filter((el)=> el.category ===item);
-    setProductFiltered(filterByCategory);
+    setProductFiltered(productsFilteredByCategory);
     
 
     if (text){
@@ -26,7 +32,7 @@ const Productos = ({ route, navigation}) => {
   
   return (
     <SafeAreaView>
-      <Header title= {item}/>
+      <Header title= {item} navigation={navigation}/>
       <Pressable style={styles.goBack} onPress={()=>navigation.goBack()}>
         <Ionicons name="arrow-back-circle" size={30} color="#614BC3" />
       </Pressable>
@@ -34,7 +40,8 @@ const Productos = ({ route, navigation}) => {
       <FlatList
         data={productFiltered} 
         keyExtractor= {products.id}
-        renderItem= {({item})=> <ProductItem navigation ={navigation} item={item}/>}
+        renderItem= {({item})=> 
+          <ProductItem navigation ={navigation} item={item}/>}
       />
    
     </SafeAreaView>

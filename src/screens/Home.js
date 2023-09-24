@@ -7,8 +7,11 @@ import { useNavigation } from '@react-navigation/native';
 
 import CategoryItem from '../components/CategoryItem';
 import { colors } from '../theme/colors';
+import { useSelector } from 'react-redux';
 
 const Home = ({navigation}) => {
+  const categories = useSelector((state) =>state.homeSlice.allCategories);
+  
   return (
     <SafeAreaView>
       <Header title="Categorías" navigation= {navigation} />
