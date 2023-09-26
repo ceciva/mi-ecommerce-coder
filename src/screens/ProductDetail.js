@@ -1,13 +1,19 @@
 import { StyleSheet, Text, View, Image, Pressable, SafeAreaView } from 'react-native'
 import React from 'react'
 import Header from '../components/Header';
-import { products } from '../data/products';
 import {AntDesign} from "@expo/vector-icons";
 import { colors } from '../theme/colors';
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
 
 const ProductDetail = ({route, navigation}) => {
     const {item} = route.params;
+
+    const productSelected = useSelector(
+        (state)=>state.homeSlice.productSelected
+    );
+
+    console.log("selected:", productSelected)
   return (
     <SafeAreaView>
         <Header title= "Detalles del producto"/>

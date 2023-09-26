@@ -14,7 +14,8 @@ const Productos = ({ route, navigation}) => {
   const {item} = route.params;
   
   const products = useSelector((state) => state.homeSlice.allProducts);
-
+  
+  
   const productsFilteredByCategory = useSelector(
     (state) => state.homeSlice.productsFilteredByCategory
   );

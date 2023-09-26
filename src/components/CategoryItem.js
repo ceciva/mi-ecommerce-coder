@@ -10,8 +10,6 @@ const CategoryItem = ({item, navigation}) => {
 
   const onHandleItem=()=>{
     dispatch(setCategory(item));
-    
-    
     navigation.navigate("productos", {item:item });
   }
   

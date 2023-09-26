@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { categories } from "../../data/categories";
 import { products } from "../../data/products";
+
+
 const homeSlice= createSlice({
     name: "home",
     initialState:{
@@ -8,6 +10,7 @@ const homeSlice= createSlice({
         allProducts: products,
         categorySelected:"",
         productsFilteredByCategory: [],
+        productSelected:{},
         
     },
     reducers:{
@@ -16,13 +19,14 @@ const homeSlice= createSlice({
 
             state.productsFilteredByCategory = state.allProducts.filter(
                 (el)=>el.category === state.categorySelected)
-        }
+        },
     },
 
-    setProductSelected: ()=>{
-
+        setProductSelected: (state, action)=>{
+        state.productSelected = action.payload;
     }
 });
 
-export const{setCategory} = homeSlice.actions;
+export const{ setCategory, setProductSelected} = homeSlice.actions;
+
 export default homeSlice.reducer;
