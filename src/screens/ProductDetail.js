@@ -7,13 +7,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 
 const ProductDetail = ({route, navigation}) => {
-    const {item} = route.params;
+    // const {item} = route.params;
 
     const productSelected = useSelector(
-        (state)=>state.homeSlice.productSelected
-    );
-
-    console.log("selected:", productSelected)
+        (state)=> state.homeSlice.productSelected
+        );
+   
   return (
     <SafeAreaView>
         <Header title= "Detalles del producto"/>
@@ -25,18 +24,18 @@ const ProductDetail = ({route, navigation}) => {
             resizeMode="cover"
             style={styles.image}
             source={{
-                uri: item.images[0],
+                uri: productSelected.images[0],
             }}
             />
 
             <View style={styles.descriptionContainer}>
-                <Text style={styles.title}> {item.title}</Text>
-                <Text style={styles.description}>{item.description}</Text>
-                <Text style={styles.price}>$ {item.price}</Text>
+                <Text style={styles.title}> {productSelected.title}</Text>
+                <Text style={styles.description}>{productSelected.description}</Text>
+                <Text style={styles.price}>$ {productSelected.price}</Text>
 
                 <View style={styles.ratingContainer}>
                     <AntDesign name="star" size={21} color="black"/>
-                    <Text style={styles.rating}>Rating: {item.rating}</Text>
+                    <Text style={styles.rating}>Rating: {productSelected.rating}</Text>
                 </View>
             </View>    
         </View>

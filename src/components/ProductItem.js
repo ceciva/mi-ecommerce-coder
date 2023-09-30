@@ -3,13 +3,21 @@ import React from 'react'
 import { colors } from '../theme/colors'
 import { useWindowDimensions } from 'react-native';
 import { Dimensions } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { setProductSelected } from '../redux/slices/homeSlice';
 
 const ProductItem = ({item, navigation}) => {
   const{height, width} = useWindowDimensions();
+  const dispatch = useDispatch();
+
+  const onHandleProductDetail =()=>{
+    dispatch(setProductSelected(item));
+    navigation.navigate("productDetail");
+  };
   
   return (
     <View style={styles.container}>
-      <Pressable onPress={()=>navigation.navigate("productDetail",{item}) }>
+      <Pressable onPress={()=>onHandleProductDetail() }>
         <Text style= {width<300 ? styles.textMin : styles.text}>{item.title}</Text>
       </Pressable>  
         <Image style={styles.image}

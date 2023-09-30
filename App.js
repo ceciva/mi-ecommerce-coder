@@ -7,6 +7,9 @@ import { store } from './src/redux/store';
 import { NavigationContainer } from '@react-navigation/native';
 import RootNavigation from './src/navigation/RootNavigation';
 import TabNav from './src/navigation/TabNav';
+import Register from './src/screens/Register';
+import AuthNav from './src/navigation/AuthNav';
+import MainNav from './src/navigation/MainNav';
 
 export default function App() {
   const [fontsLoaded]= useFonts({
@@ -17,13 +20,16 @@ export default function App() {
   if (!fontsLoaded){
     return;
   }
-console.log(fontsLoaded) ; 
+
   return (
+    
     <Provider store={store}>
-      <NavigationContainer>
-        <TabNav/>
-      </NavigationContainer>
+      
+      {/* <AuthNav/> */}
+        {/* <TabNav/> */}
+      <MainNav/>
     </Provider>  
+   
   );
 }
 

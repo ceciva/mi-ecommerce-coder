@@ -49,7 +49,7 @@ const Productos = ({ route, navigation}) => {
   )
 }
 
-export default Productos
+export default Productos;
 
 const styles = StyleSheet.create({
   goBack:{

@@ -8,9 +8,14 @@ import { useNavigation } from '@react-navigation/native';
 import CategoryItem from '../components/CategoryItem';
 import { colors } from '../theme/colors';
 import { useSelector } from 'react-redux';
+import { useGetCategoriesQuery } from '../servicios/ecApi';
 
 const Home = ({navigation}) => {
-  const categories = useSelector((state) =>state.homeSlice.allCategories);
+  // const categories = useSelector((state) =>state.homeSlice.allCategories);
+
+  const datos = useGetCategoriesQuery();
+  
+  const categories= datos.data;
   
   return (
     <SafeAreaView>
