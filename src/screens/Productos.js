@@ -6,15 +6,21 @@ import Search from '../components/Search'
 import ProductItem from '../components/ProductItem'
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector } from 'react-redux'
- 
+
+import { useGetProductsQuery} from '../servicios/ecApi'; 
+
 const Productos = ({ route, navigation}) => {
   const [productFiltered, setProductFiltered]= useState([]);
   const [text, setText]= useState(null);
 
   const {item} = route.params;
   
-  const products = useSelector((state) => state.homeSlice.allProducts);
+  //trae productos desde homeSlice
+  // const products = useSelector((state) => state.homeSlice.allProducts);
+  // console.log( "productos desde slice:", products);
   
+  //trae productos desde api
+  const products = useGetProductsQuery();
   
   const productsFilteredByCategory = useSelector(
     (state) => state.homeSlice.productsFilteredByCategory
