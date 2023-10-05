@@ -37,7 +37,7 @@ const Login = ({navigation}) => {
             setPasswordError(" *Debe ingresar una contraseña!");
 
           } else if(password.length<6){
-            setPasswordError ("la contraseña debe tener 6 dígitos como mínimo");
+            setPasswordError (" * la contraseña debe tener 6 dígitos como mínimo!");
           }
 
         }

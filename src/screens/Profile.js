@@ -4,15 +4,15 @@ import Header from '../components/Header'
 import { colors  } from '../theme/colors';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-
+import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker'; 
 import {usePutImageMutation}from "../servicios/ecApi";
 import { useGetImageQuery } from '../servicios/ecApi';
-
-
+import { clearUser } from '../redux/slices/authSlice';
 const Profile = () => {
-
-     const [putImage, result]= usePutImageMutation();
+    const dispatch= useDispatch()
+    const handleClearUser=()=>{dispatch(clearUser())}
+    const [putImage, result]= usePutImageMutation();
 
     const {data, isLoadin, error, isError, refetch} = useGetImageQuery();
 
@@ -72,17 +72,28 @@ const Profile = () => {
             
             />
         </View>
-        <View style={styles.iconsContainer}>
-            <Pressable onPress={()=> openCamera()}>
-                <FontAwesome name="camera" size={50} color= {colors.violet} />
+          <View style={styles.iconsContainer}>
+              <Pressable onPress={()=> openCamera()}>
+                  <FontAwesome name="camera" size={50} color= {colors.violet} />
+                  <Text style={styles.iconsText}>Camera</Text>
+              </Pressable>
+
+              <Pressable onPress={()=> pickImage()}>
+              <FontAwesome name="photo" size={50} color={colors.violet} />
+              <Text style={styles.iconsText}>Galería</Text>
+              </Pressable>
+
+              <Pressable onPress={()=> console.log("ver location..")}>
+              <Ionicons name="location-sharp" size={50} color={colors.violet} />
+              <Text style={styles.iconsText}>Mapa</Text>
+              </Pressable>
+          </View>
+          <View style={styles.logoutContainer}>
+            <Pressable onPress={()=>handleClearUser()}>
+              <Ionicons name="person-remove-sharp" size={50} color={colors.violet} />
+              <Text style={styles.iconsText}>Logout</Text>
             </Pressable>
-            <Pressable onPress={()=> pickImage()}>
-            <FontAwesome name="photo" size={50} color={colors.violet} />
-            </Pressable>
-            <Pressable onPress={()=> console.log("ver location..")}>
-            <Ionicons name="location-sharp" size={50} color={colors.violet} />
-            </Pressable>
-        </View>
+          </View>
     </View>
   );
 };
@@ -104,6 +115,17 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         marginTop:20
+    },
+    logoutContainer:{
+        flexDirection: "row",
+        justifyContent: "center",
+        marginTop:100,
+    },
+    iconsText:{
+      fontFamily: "dancing",
+      fontSize: 15,
+      color: colors.turquesa,
+      
     }
 
 })

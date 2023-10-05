@@ -31,7 +31,7 @@ const Register = ({navigation}) => {
             setPasswordError(" *Debe ingresar una contraseña!");
 
           } else if(password.length<6){
-            setPasswordError ("la contraseña debe tener 6 dígitos como mínimo");
+            setPasswordError ("* la contraseña debe tener 6 dígitos como mínimo!");
           }
 
         }
@@ -55,7 +55,7 @@ const Register = ({navigation}) => {
       {emailError && (
         <Text style= {styles.errorText}>{emailError}</Text>
       )}
-      
+
       <TextInput
         style= {styles.email}
         placeholder= "password"
