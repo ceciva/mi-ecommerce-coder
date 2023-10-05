@@ -18,7 +18,7 @@ const Profile = () => {
 
     const defaultImage=
     "https://cdn3.vectorstock.com/i/1000x1000/90/07/avatars-default-photo-placeholder-vector-22419007.jpg" ;
-
+    
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -27,8 +27,9 @@ const Profile = () => {
           aspect: [4, 4],
           quality: 1,
           base64: true,
+          
         });
-    
+        
            
         if (!result.canceled) {
             await putImage({
@@ -38,25 +39,26 @@ const Profile = () => {
         }
       };
       
-    //   const openCamera = async () => {
-    //     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+      const openCamera = async () => {
+        const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
     
-    //     if (permissionResult.granted === false) {
-    //       alert("La app no tiene permiso para acceder a tu cámara!");
-    //       return;
-    //     } else {
-    //       const result = await ImagePicker.launchCameraAsync();
+        if (permissionResult.granted === false) {
+          alert("Acceso a la cámara denegado");
+          return;
+        } else {
+          const result = await ImagePicker.launchCameraAsync({
+            base64: true,
+          });
     
-    //       console.log(result);
     
-    //       if (!result.canceled) {
-    //         await putImage({
-    //           image: `data:image/jpeg;base64,${result.assets[0].base64}`,
-    //         });
-    //         refetch();
-    //       }
-    //     }
-    //   };
+          if (!result.canceled) {
+            await putImage({
+              image: `data:image/jpeg;base64,${result.assets[0].base64}`,
+            });
+            refetch();
+          }
+        }
+      };  
 
 
   return (
@@ -67,10 +69,11 @@ const Profile = () => {
             <Image style= {styles.image}
             source={{uri: data? data.image: defaultImage 
             }}
+            
             />
         </View>
         <View style={styles.iconsContainer}>
-            <Pressable onPress={()=> console.log("botón cámara presionado")}>
+            <Pressable onPress={()=> openCamera()}>
                 <FontAwesome name="camera" size={50} color= {colors.violet} />
             </Pressable>
             <Pressable onPress={()=> pickImage()}>

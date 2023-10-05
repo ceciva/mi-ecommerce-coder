@@ -9,41 +9,65 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 const Register = ({navigation}) => {
     const [email, setEmail]= useState("");
     const [password, setPassword]= useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
 
     const handleRegister= async() =>{
         
         try{
-
-        const response= await createUserWithEmailAndPassword(firebase_auth, email, password) ;
-        
-               
-        navigation.navigate("login");
-
+          const response= await createUserWithEmailAndPassword(firebase_auth, email, password) ;
+          navigation.navigate("login");
 
         }
-        catch (e){
-        console.log("error en el registro", e); 
+        catch (error){
+          if (email.length === 0){
+            setEmailError(" * Este campo es obligatorio!");
+
+          } else if(error.message === "Firebase: Error (auth/invalid-email)."){
+            setEmailError("* Este email es inváildo!");
+          }
+
+          if (password.length === 0){
+            setPasswordError(" *Debe ingresar una contraseña!");
+
+          } else if(password.length<6){
+            setPasswordError ("la contraseña debe tener 6 dígitos como mínimo");
+          }
 
         }
     }
 
   return (
 
-    
     <View style={styles.container}>
       <Text style={styles.title}>Registro</Text>
+      
       <TextInput
         style= {styles.email}
         placeholder= "email adress"
-        onChangeText={newText=> setEmail(newText)}
-        defaultValue={email}
+        value={email}
+        onChangeText={(text)=> {
+          setEmail(text);
+          setEmailError("");
+        }}
+        
       />
+      {emailError && (
+        <Text style= {styles.errorText}>{emailError}</Text>
+      )}
       <TextInput
         style= {styles.email}
         placeholder= "password"
-        onChangeText={newPassword=> setPassword(newPassword)}
-        defaultValue={password}
+        value={password}
+        onChangeText={(text)=> {
+          setPassword(text);
+          setPasswordError("");
+        }}
+        
       />
+      {passwordError && (
+        <Text style= {styles.errorText}> {passwordError} </Text>
+      )}
 
       <Pressable onPress={()=> handleRegister()}>
         <Text style={styles.registrarse}>
@@ -54,7 +78,6 @@ const Register = ({navigation}) => {
       <Pressable onPress={()=>navigation.navigate("login")} >
         <Text style={styles.yaTienes}>
             Ya tienes cuenta? Iniciar sesión
-            
         </Text> 
        </Pressable>    
 
@@ -112,6 +135,10 @@ const styles = StyleSheet.create({
         fontSize:20,
         color: colors.violet,
         fontFamily: "dancing",
-
-    }
+    },
+    errorText:{
+      color: "red",
+      marginTop: 5,
+      marginBottom: 5,
+    },
 })
