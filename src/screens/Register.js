@@ -55,6 +55,7 @@ const Register = ({navigation}) => {
       {emailError && (
         <Text style= {styles.errorText}>{emailError}</Text>
       )}
+      
       <TextInput
         style= {styles.email}
         placeholder= "password"

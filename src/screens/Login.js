@@ -12,6 +12,9 @@ const Login = ({navigation}) => {
     const dispatch = useDispatch();
     const [email, setEmail]= useState("");
     const [password, setPassword]= useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+
 
     const handleLogin= async()=>{
         try{
@@ -21,12 +24,21 @@ const Login = ({navigation}) => {
           dispatch (setUser(response.user.email));
           dispatch (setIdToken(response._tokenResponse.idToken));
 
-           
-
-
         }
-        catch (e){
-           console.log ("error en login", e); 
+        catch (error){
+          if (email.length === 0){
+            setEmailError(" * Este campo es obligatorio!");
+
+          } else if(error.message === "Firebase: Error (auth/invalid-email)."){
+            setEmailError("* Este email es inváildo!");
+          }
+
+          if (password.length === 0){
+            setPasswordError(" *Debe ingresar una contraseña!");
+
+          } else if(password.length<6){
+            setPasswordError ("la contraseña debe tener 6 dígitos como mínimo");
+          }
 
         }
     }
@@ -39,15 +51,29 @@ const Login = ({navigation}) => {
       <TextInput
         style= {styles.email}
         placeholder= "email"
-        onChangeText={newText=> setEmail(newText)}
         defaultValue={email}
+        onChangeText={(text)=> {
+          setEmail(text);
+          setEmailError("");
+        }}
       />
+      {emailError && (
+        <Text style= {styles.errorText}>{emailError}</Text>
+      )}
+
       <TextInput
         style= {styles.email}
         placeholder= "password"
-        onChangeText={newPassword=> setPassword(newPassword)}
         defaultValue={password}
+        onChangeText={(text)=> {
+          setPassword(text);
+          setPasswordError("");
+        }}
       />
+      {passwordError && (
+        <Text style= {styles.errorText}> {passwordError} </Text>
+      )}
+
 
       <Pressable onPress={()=> handleLogin()}>
         <Text style={styles.registrarse}>
@@ -114,5 +140,10 @@ const styles = StyleSheet.create({
         color: colors.violet,
         fontFamily: "dancing",
 
-    }
+    },
+    errorText:{
+      color: "red",
+      marginTop: 5,
+      marginBottom: 5,
+    },
 })
