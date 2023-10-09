@@ -12,8 +12,8 @@ const user = useSelector((state)=> state.authSlice.user) ;
   return (
 
     <NavigationContainer>
-      <TabNav/>
-    {/* {user ? <TabNav/>:<AuthNav/>} */}
+      {/* <TabNav/> */}
+    {user ? <TabNav/>:<AuthNav/>}
 
     </NavigationContainer>
   )

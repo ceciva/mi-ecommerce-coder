@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../components/Header'
 import { colors  } from '../theme/colors';
@@ -6,14 +6,17 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker'; 
+import * as Location from "expo-location";
 import {usePutImageMutation}from "../servicios/ecApi";
 import { useGetImageQuery } from '../servicios/ecApi';
 import { clearUser } from '../redux/slices/authSlice';
-const Profile = () => {
+
+const Profile = ({navigation}) => {
     const dispatch= useDispatch()
     const handleClearUser=()=>{dispatch(clearUser())}
     const [putImage, result]= usePutImageMutation();
-
+    const [location, setLocation]= useState();
+    const [errorMsg, setErrorMsg] = useState(null);
     const {data, isLoadin, error, isError, refetch} = useGetImageQuery();
 
     const defaultImage=
@@ -60,6 +63,21 @@ const Profile = () => {
         }
       };  
 
+      const getCoords= async () => {
+      
+        let { status } = await Location.requestForegroundPermissionsAsync();
+         
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          console.log(errorMsg)
+          return;
+        };
+  
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
+        console.log("esta es la location:", location)
+        navigation.navigate("mapaLoc", {location });
+      };
 
   return (
     <View>
@@ -73,17 +91,24 @@ const Profile = () => {
             />
         </View>
           <View style={styles.iconsContainer}>
+
+        {/* abre cámara */}
+            
               <Pressable onPress={()=> openCamera()}>
                   <FontAwesome name="camera" size={50} color= {colors.violet} />
                   <Text style={styles.iconsText}>Camera</Text>
               </Pressable>
+
+        {/*abre galería  */}
 
               <Pressable onPress={()=> pickImage()}>
               <FontAwesome name="photo" size={50} color={colors.violet} />
               <Text style={styles.iconsText}>Galería</Text>
               </Pressable>
 
-              <Pressable onPress={()=> console.log("ver location..")}>
+        {/* location */}
+
+              <Pressable onPress={()=> console.log("abrir mapa")}>
               <Ionicons name="location-sharp" size={50} color={colors.violet} />
               <Text style={styles.iconsText}>Mapa</Text>
               </Pressable>
