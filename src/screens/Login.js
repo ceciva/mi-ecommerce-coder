@@ -6,7 +6,7 @@ import { firebase_auth } from '../firebase/firebase_auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { setIdToken, setUser } from '../redux/slices/authSlice';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
     const dispatch = useDispatch();
@@ -20,7 +20,8 @@ const Login = ({navigation}) => {
         try{
 
           const response = await signInWithEmailAndPassword (firebase_auth, email, password);  
-          
+          AsyncStorage.setItem("userEmail", response.user.email);
+          console.log ("este es el mail ingresado", response.user.email);
           dispatch (setUser(response.user.email));
           dispatch (setIdToken(response._tokenResponse.idToken));
 

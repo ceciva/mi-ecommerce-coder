@@ -17,7 +17,7 @@ reducers: {
         state.idToken = action.payload;
     },
     clearUser: (state)=> {
-        (state.user = null), (state.idToken = null);
+        (state.user = null);
     },
 },
 

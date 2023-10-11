@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Pressable, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable, ScrollView, Alert } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../components/Header'
 import { colors  } from '../theme/colors';
@@ -9,11 +9,12 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Location from "expo-location";
 import {usePutImageMutation}from "../servicios/ecApi";
 import { useGetImageQuery } from '../servicios/ecApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { clearUser } from '../redux/slices/authSlice';
 
 const Profile = ({navigation}) => {
     const dispatch= useDispatch()
-    const handleClearUser=()=>{dispatch(clearUser())}
+    
     const [putImage, result]= usePutImageMutation();
     const [location, setLocation]= useState();
     const [errorMsg, setErrorMsg] = useState(null);
@@ -79,6 +80,26 @@ const Profile = ({navigation}) => {
         navigation.navigate("mapaLoc", {location });
       };
 
+      const handleLogOut= async()=>{
+        try {
+          
+          dispatch(clearUser()) ;
+          await AsyncStorage.removeItem("userEmail");
+
+        } catch (error) {
+          
+        }
+      };
+
+      const onLogout= () => 
+        Alert.alert ('Cerrar sesión', 'Está seguro que desea cerrar la sesión?', [
+            {
+              text: 'Cancel',
+              style: 'cancel',
+            },
+            {text: 'OK', onPress: () => handleLogOut()},
+          ]);
+
   return (
     <View>
         <Header title= "Mi Perfil"/>
@@ -113,8 +134,11 @@ const Profile = ({navigation}) => {
               <Text style={styles.iconsText}>Mapa</Text>
               </Pressable>
           </View>
+
+          {/*logout  */}
+          
           <View style={styles.logoutContainer}>
-            <Pressable onPress={()=>handleClearUser()}>
+            <Pressable onPress={()=> onLogout()}>
               <Ionicons name="person-remove-sharp" size={50} color={colors.violet} />
               <Text style={styles.iconsText}>Logout</Text>
             </Pressable>
