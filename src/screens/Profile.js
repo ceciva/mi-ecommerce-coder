@@ -67,7 +67,7 @@ const Profile = ({navigation}) => {
       const getCoords= async () => {
       
         let { status } = await Location.requestForegroundPermissionsAsync();
-         
+        ;
         if (status !== 'granted') {
           setErrorMsg('Permission to access location was denied');
           console.log(errorMsg)
@@ -76,7 +76,7 @@ const Profile = ({navigation}) => {
   
         let location = await Location.getCurrentPositionAsync({});
         setLocation(location);
-        console.log("esta es la location:", location)
+        // console.log("esta es la location:", location)
         navigation.navigate("mapaLoc", {location });
       };
 
@@ -129,7 +129,7 @@ const Profile = ({navigation}) => {
 
         {/* location */}
 
-              <Pressable onPress={()=> console.log("abrir mapa")}>
+              <Pressable onPress={()=> getCoords()}>
               <Ionicons name="location-sharp" size={50} color={colors.violet} />
               <Text style={styles.iconsText}>Mapa</Text>
               </Pressable>

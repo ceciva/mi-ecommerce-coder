@@ -5,7 +5,7 @@ import { colors } from '../theme/colors';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './RootNavigation';
-import Profile from '../screens/Profile';
+import ProfileNav from './ProfileNav';
 
 
 
@@ -26,8 +26,8 @@ const TabNav = () => {
                 )
             }}/>
         <Tab.Screen 
-            name="profile" 
-            component={Profile}
+            name="profileNav" 
+            component={ProfileNav}
             options={{
                 tabBarIcon:({focused})=>(
                     <Ionicons 
