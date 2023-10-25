@@ -21,7 +21,14 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE"
+      ],
+      "package": "com.cecivadillo.ecommerceCoder"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -39,6 +46,11 @@
           "locationAlwaysAndWhenInUsePermission": "Permitir a esta app acceder a tu ubicación."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "efd301c6-5e7b-4af0-8312-d753567d2e4c"
+      }
+    }
   }
 }

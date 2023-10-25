@@ -12,7 +12,10 @@ export const ecApi = createApi ({
         }),
     
         getProducts: builder.query({
-            query: ()=> "productos.json",
+            query: (category)=> `productos.json?orderBy="category"&equalTo="${category}"`,
+            transformResponse: (response, meta, arg) =>{
+                return Object.values(response);
+            },
         }),
 
         getImage: builder.query({

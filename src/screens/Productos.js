@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 
 import { useGetProductsQuery} from '../servicios/ecApi'; 
 
+
 const Productos = ({ route, navigation}) => {
   const [productFiltered, setProductFiltered]= useState([]);
   const [text, setText]= useState(null);
@@ -20,18 +21,21 @@ const Productos = ({ route, navigation}) => {
   // console.log( "productos desde slice:", products);
   
   //trae productos desde api
-  const products = useGetProductsQuery();
+
+  const {data, error, isLoading} = useGetProductsQuery(item);
   
-  const productsFilteredByCategory = useSelector(
-    (state) => state.homeSlice.productsFilteredByCategory
-  );
+
+  // const productsFilteredByCategory = useSelector(
+  //   (state) => state.homeSlice.productsFilteredByCategory
+  // );
   
   useEffect(() => {
-    setProductFiltered(productsFilteredByCategory);
+    setProductFiltered(productFiltered);
     
 
     if (text){
-      const titleProduct= products.filter((el)=> el.title.toLowerCase() === text.toLocaleLowerCase());
+      const titleProduct= data.filter((el)=> el.title.toLowerCase() === text.toLocaleLowerCase());
+      console.log(titleProduct);
       setProductFiltered(titleProduct);
     }   
 
@@ -45,8 +49,8 @@ const Productos = ({ route, navigation}) => {
       </Pressable>
       <Search text= {text} setText={setText}/>
       <FlatList
-        data={productFiltered} 
-        keyExtractor= {products.id}
+        data={data} 
+        keyExtractor= {item => item.id }
         renderItem= {({item})=> 
           <ProductItem navigation ={navigation} item={item}/>}
       />
